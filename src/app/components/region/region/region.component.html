@@ -1,0 +1,62 @@
+<div class="region-table-container">
+  <table class="region-table">
+    <thead>
+      <tr>
+        <th>Region Name</th>
+        <th>Region Code</th>
+        <th>Url</th>
+        <th>Add Region</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let region of regions">
+        <td>{{ region.name }}</td>
+        <td>{{ region.code }}</td>
+        <td>
+          <button class="secondary" (click)="openLink(region.regionImageUrl)">
+            View
+          </button>
+        </td>
+        <td>
+          <button (click)="addRegion()">Add Region</button>
+        </td>
+        <td>
+          <button (click)="updateRegion(region)">Update</button>
+        </td>
+        <td>
+          <button class="danger" (click)="deleteRegion(region)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal Dialog -->
+<div class="dialog" *ngIf="showDialog">
+  <div class="dialog-content">
+    <h3 *ngIf="!isEditMode">Add New Region</h3>
+    <h3 *ngIf="isEditMode">Update Region</h3>
+    <form [formGroup]="regionForm">
+      <label for="name">Name:</label>
+      <input id="name" formControlName="name" type="text" />
+
+      <label for="code">Code:</label>
+      <input id="code" formControlName="code" type="text" />
+
+      <label for="regionImageUrl">URL:</label>
+      <input id="regionImageUrl" formControlName="regionImageUrl" type="text" />
+
+      <div class="dialog-actions">
+        <button type="button" *ngIf="!isEditMode" (click)="saveRegion()">
+          Save
+        </button>
+        <button type="button" *ngIf="isEditMode" (click)="saveUpdatedRegion()">
+          Update
+        </button>
+        <button type="button" (click)="closeDialog()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
