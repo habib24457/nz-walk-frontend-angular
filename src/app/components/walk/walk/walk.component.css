@@ -1,0 +1,136 @@
+.walk-table-container {
+  margin: 20px auto;
+  width: 60%;
+  overflow-x: auto;
+}
+
+.walk-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.walk-table th,
+.walk-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.walk-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.walk-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.walk-table td img {
+  max-width: 80px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.walk-table tr:last-child td {
+  border-bottom: none;
+}
+
+button {
+  background: linear-gradient(to bottom, #f9f9f9, #e3e3e3);
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 5px;
+}
+
+button:hover {
+  background: linear-gradient(to bottom, #e3e3e3, #d6d6d6);
+  border-color: #bbb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+button:active {
+  background: linear-gradient(to bottom, #d6d6d6, #c9c9c9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(1px);
+}
+
+button.danger {
+  background: linear-gradient(to bottom, #ff6b6b, #ff4c4c);
+  color: white;
+  border: 1px solid #e63939;
+}
+
+button.danger:hover {
+  background: linear-gradient(to bottom, #ff4c4c, #e63939);
+  border-color: #d32f2f;
+}
+
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.dialog-content {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+}
+
+.dialog-content h3 {
+  margin-top: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+.dialog-content label {
+  display: block;
+  margin: 15px 0 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.dialog-content input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

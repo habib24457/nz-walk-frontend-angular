@@ -1,0 +1,57 @@
+<div class="walk-table-container">
+  <table class="walk-table">
+    <thead>
+      <tr>
+        <th>Walk Name</th>
+        <th>Walk Length (km)</th>
+        <th>Region</th>
+        <th>Add Walk</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let walk of walks">
+        <td>{{ walk.name }}</td>
+        <td>{{ walk.lengthInKm }}</td>
+        <td>{{ walk.region.name }}</td>
+        <td>
+          <button (click)="addWalk()">Add Walk</button>
+        </td>
+        <td>
+          <button (click)="updateWalk(walk)">Update</button>
+        </td>
+        <td>
+          <button class="danger" (click)="deleteWalk(walk)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal Dialog -->
+<div class="dialog" *ngIf="showDialog">
+  <div class="dialog-content">
+    <h3 *ngIf="!isEditMode">Add New Walk</h3>
+    <h3 *ngIf="isEditMode">Update Walk</h3>
+    <form [formGroup]="walkForm">
+      <label for="name">Walk Name:</label>
+      <input id="name" formControlName="name" type="text" />
+
+      <label for="length">Walk Length (km):</label>
+      <input id="length" formControlName="length" type="number" />
+      <label for="region">Region:</label>
+      <input id="region" formControlName="region" type="text" />
+
+      <div class="dialog-actions">
+        <button type="button" *ngIf="isEditMode" (click)="saveWalk()">
+          Save
+        </button>
+        <button type="button" *ngIf="isEditMode" (click)="saveUpdatedWalk()">
+          Update
+        </button>
+        <button type="button" (click)="closeDialog()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

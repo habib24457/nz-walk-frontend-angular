@@ -81,7 +81,6 @@ export class RegionComponent {
     this.http.put(apiUrl, updatedRegion).subscribe({
       next: (response) => {
         console.log('Region updated successfully:', response);
-        // Update the region in the table
         const index = this.regions.findIndex(
           (r) => r.id === this.selectedRegion.id
         );
@@ -106,7 +105,6 @@ export class RegionComponent {
       this.http.delete(apiUrl).subscribe({
         next: () => {
           console.log(`Region with ID ${region.id} deleted successfully.`);
-          // Remove the deleted region from the regions array
           this.regions = this.regions.filter((r) => r.id !== region.id);
         },
         error: (error) => {
