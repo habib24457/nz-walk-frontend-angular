@@ -2,12 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: auto;
+  margin-top: 20px;
   overflow-x: auto;
 }
 
 .walk-table {
-  width: 60%;
+  width: 80%;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   font-size: 14px;
@@ -51,7 +52,7 @@ button {
   color: #333;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 10px 20px;
+  padding: 12px 25px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;

@@ -3,6 +3,8 @@
     <thead>
       <tr>
         <th>Walk Name</th>
+        <th>Description</th>
+        <th>Difficulty</th>
         <th>Walk Length (km)</th>
         <th>Region</th>
         <th>Add Walk</th>
@@ -13,6 +15,8 @@
     <tbody>
       <tr *ngFor="let walk of walks">
         <td>{{ walk.name }}</td>
+        <td>{{ walk.description }}</td>
+        <td>{{ walk.difficulty.name }}</td>
         <td>{{ walk.lengthInKm }}</td>
         <td>{{ walk.region.name }}</td>
         <td>

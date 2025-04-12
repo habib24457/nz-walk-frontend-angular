@@ -21,12 +21,12 @@ export class WalkComponent {
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.walkForm = this.fb.group({
-      name: [''],
-      description: [''],
-      lengthInKm: [''],
-      walkImageUrl: [''],
-      difficultyId: [''],
-      regionId: [''],
+      name: '',
+      description: '',
+      lengthInKm: 0,
+      walkImageUrl: '',
+      difficultyId: '',
+      regionId: '',
     });
   }
 
@@ -86,7 +86,7 @@ export class WalkComponent {
     const newWalk = {
       name: this.walkForm.value.name,
       description: this.walkForm.value.description,
-      walLengthInKm: this.walkForm.value.walLengthInKm,
+      lengthInKm: this.walkForm.value.lengthInKm,
       walkImageUrl: this.walkForm.value.walkImageUrl,
       regionId: this.walkForm.value.regionId,
       difficultyId:
@@ -111,41 +111,42 @@ export class WalkComponent {
     this.isEditMode = true;
     this.showDialog = true;
     this.selectedWalk = walk;
+
     this.walkForm.patchValue({
       name: walk.name,
       description: walk.description,
-      walLengthInKm: walk.walLengthInKm,
+      lengthInKm: walk.lengthInKm,
       walkImageUrl: walk.walkImageUrl,
-      regionId: walk.regionId,
-      difficultyId: walk.difficultyId,
+      regionId: walk.region?.id || '',
+      difficultyId: walk.difficulty?.id || '',
     });
+
+    console.log('Updating walk:', this.walkForm.value);
   }
 
   saveUpdatedWalk() {
     const apiUrl = `https://new-zone-api-brhpfkd2emavh2ep.germanywestcentral-01.azurewebsites.net/api/Walks/${this.selectedWalk.id}`;
 
+    console.log('Saving updated walk:', this.walkForm.value);
     const updatedWalk = {
       name: this.walkForm.value.name,
       description: this.walkForm.value.description,
-      walLengthInKm: this.walkForm.value.walLengthInKm,
+      lengthInKm: this.walkForm.value.lengthInKm,
       walkImageUrl: this.walkForm.value.walkImageUrl,
       regionId: this.walkForm.value.regionId,
-      difficultyId:
-        this.walkForm.value.difficultyId ||
-        'd37fa264-31a4-4156-b010-13b52c4f6ee9',
+      difficultyId: this.walkForm.value.difficultyId,
     };
 
     this.http.put(apiUrl, updatedWalk).subscribe({
       next: (response) => {
         console.log('Walk updated successfully:', response);
-
         const index = this.walks.findIndex(
           (w) => w.id === this.selectedWalk.id
         );
         if (index !== -1) {
           this.walks[index] = { ...this.selectedWalk, ...updatedWalk };
         }
-
+        this.fetchWalks();
         this.showDialog = false;
         this.walkForm.reset();
       },
