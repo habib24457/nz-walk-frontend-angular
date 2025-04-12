@@ -32,19 +32,34 @@
 <!-- Modal Dialog -->
 <div class="dialog" *ngIf="showDialog">
   <div class="dialog-content">
-    <h3 *ngIf="!isEditMode">Add New Walk</h3>
-    <h3 *ngIf="isEditMode">Update Walk</h3>
+    <h3 *ngIf="!isEditMode">Add New Region</h3>
+    <h3 *ngIf="isEditMode">Update Region</h3>
     <form [formGroup]="walkForm">
-      <label for="name">Walk Name:</label>
+      <label for="name">Give Your Walk A Name:</label>
       <input id="name" formControlName="name" type="text" />
+      <label for="description">Description:</label>
+      <input id="description" formControlName="description" type="text" />
+      <label for="lengthInKm">Walk Length (KM):</label>
+      <input id="lengthInKm" formControlName="lengthInKm" type="number" />
+      <label for="walkImageUrl">walkImageUrl:</label>
+      <input id="walkImageUrl" formControlName="walkImageUrl" type="text" />
 
-      <label for="length">Walk Length (km):</label>
-      <input id="length" formControlName="length" type="number" />
-      <label for="region">Region:</label>
-      <input id="region" formControlName="region" type="text" />
+      <label for="regionId">Region:</label>
+      <select id="regionId" formControlName="regionId">
+        <option *ngFor="let region of regions" [value]="region.id">
+          {{ region.name }}
+        </option>
+      </select>
+
+      <label for="difficultyId">Difficulty:</label>
+      <select id="difficultyId" formControlName="difficultyId">
+        <option *ngFor="let difficulty of difficulties" [value]="difficulty.id">
+          {{ difficulty.name }}
+        </option>
+      </select>
 
       <div class="dialog-actions">
-        <button type="button" *ngIf="isEditMode" (click)="saveWalk()">
+        <button type="button" *ngIf="!isEditMode" (click)="saveWalk()">
           Save
         </button>
         <button type="button" *ngIf="isEditMode" (click)="saveUpdatedWalk()">

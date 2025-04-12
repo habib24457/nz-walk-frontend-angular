@@ -12,6 +12,8 @@ import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class WalkComponent {
   walks: any[] = [];
+  regions: any[] = [];
+  difficulties: any[] = [];
   showDialog: boolean = false;
   isEditMode: boolean = false;
   walkForm: FormGroup;
@@ -21,12 +23,17 @@ export class WalkComponent {
     this.walkForm = this.fb.group({
       name: [''],
       description: [''],
+      lengthInKm: [''],
       walkImageUrl: [''],
+      difficultyId: [''],
+      regionId: [''],
     });
   }
 
   ngOnInit() {
     this.fetchWalks();
+    this.fetchRegions();
+    this.fetchDifficulties();
   }
 
   fetchWalks() {
@@ -43,6 +50,29 @@ export class WalkComponent {
     });
   }
 
+  fetchRegions() {
+    const apiUrl =
+      'https://new-zone-api-brhpfkd2emavh2ep.germanywestcentral-01.azurewebsites.net/api/Regions';
+    this.http.get<any[]>(apiUrl).subscribe({
+      next: (data) => {
+        this.regions = data;
+        console.log('Regions:', this.regions);
+      },
+      error: (error) => {
+        console.error('Error fetching regions:', error);
+      },
+    });
+  }
+
+  fetchDifficulties() {
+    this.difficulties = [
+      { id: 'd37fa264-31a4-4156-b010-13b52c4f6ee9', name: 'Easy' },
+      { id: '30711259-7265-4794-af0d-be1057745b46', name: 'Medium' },
+      { id: 'bd165a93-cc41-4d45-852a-26c6049b0411', name: 'Hard' },
+    ];
+    console.log('Difficulties:', this.difficulties);
+  }
+
   addWalk() {
     this.isEditMode = false;
     this.showDialog = true;
@@ -52,12 +82,22 @@ export class WalkComponent {
   saveWalk() {
     const apiUrl =
       'https://new-zone-api-brhpfkd2emavh2ep.germanywestcentral-01.azurewebsites.net/api/Walks';
-    const newWalk = this.walkForm.value;
+
+    const newWalk = {
+      name: this.walkForm.value.name,
+      description: this.walkForm.value.description,
+      walLengthInKm: this.walkForm.value.walLengthInKm,
+      walkImageUrl: this.walkForm.value.walkImageUrl,
+      regionId: this.walkForm.value.regionId,
+      difficultyId:
+        this.walkForm.value.difficultyId ||
+        'd37fa264-31a4-4156-b010-13b52c4f6ee9',
+    };
 
     this.http.post(apiUrl, newWalk).subscribe({
       next: (response) => {
         console.log('Walk saved successfully:', response);
-        this.walks.push(newWalk);
+        this.walks.push(response);
         this.showDialog = false;
         this.walkForm.reset();
       },
@@ -71,22 +111,41 @@ export class WalkComponent {
     this.isEditMode = true;
     this.showDialog = true;
     this.selectedWalk = walk;
-    this.walkForm.patchValue(walk);
+    this.walkForm.patchValue({
+      name: walk.name,
+      description: walk.description,
+      walLengthInKm: walk.walLengthInKm,
+      walkImageUrl: walk.walkImageUrl,
+      regionId: walk.regionId,
+      difficultyId: walk.difficultyId,
+    });
   }
 
   saveUpdatedWalk() {
     const apiUrl = `https://new-zone-api-brhpfkd2emavh2ep.germanywestcentral-01.azurewebsites.net/api/Walks/${this.selectedWalk.id}`;
-    const updatedWalk = this.walkForm.value;
+
+    const updatedWalk = {
+      name: this.walkForm.value.name,
+      description: this.walkForm.value.description,
+      walLengthInKm: this.walkForm.value.walLengthInKm,
+      walkImageUrl: this.walkForm.value.walkImageUrl,
+      regionId: this.walkForm.value.regionId,
+      difficultyId:
+        this.walkForm.value.difficultyId ||
+        'd37fa264-31a4-4156-b010-13b52c4f6ee9',
+    };
 
     this.http.put(apiUrl, updatedWalk).subscribe({
       next: (response) => {
         console.log('Walk updated successfully:', response);
+
         const index = this.walks.findIndex(
           (w) => w.id === this.selectedWalk.id
         );
         if (index !== -1) {
           this.walks[index] = { ...this.selectedWalk, ...updatedWalk };
         }
+
         this.showDialog = false;
         this.walkForm.reset();
       },
