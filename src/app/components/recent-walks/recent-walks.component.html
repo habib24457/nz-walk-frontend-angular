@@ -1,0 +1,15 @@
+<div class="recent-walks-container">
+  <div class="walk-card" *ngFor="let walk of walks">
+    <img
+      [src]="walk.walkImageUrl ? walk.walkImageUrl : 'assets/defaultWalk.jpg'"
+      alt="Walk Image"
+      class="walk-image"
+    />
+    <div class="walk-details">
+      <h3>{{ walk.name }}</h3>
+      <p><strong>Difficulty:</strong> {{ walk.difficulty?.name }}</p>
+      <p><strong>Region:</strong> {{ walk.region?.name }}</p>
+      <p><strong>Description:</strong> {{ walk.description }}</p>
+    </div>
+  </div>
+</div>
