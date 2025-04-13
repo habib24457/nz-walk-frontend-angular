@@ -1,13 +1,13 @@
-.region-table-container {
+.walk-table-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: auto;
+  margin-top: 20px;
   overflow-x: auto;
 }
-
 .region-table {
-  width: 80%;
+  width: 90%;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   font-size: 14px;
