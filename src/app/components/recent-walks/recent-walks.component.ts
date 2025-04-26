@@ -27,7 +27,7 @@ export class RecentWalksComponent implements OnInit {
       next: (data) => {
         this.walks = data;
         console.log('Walksksksk:', this.walks);
-        this.loading = true;
+        this.loading = false;
       },
       error: (error) => {
         console.error('Error fetching regions:', error);
