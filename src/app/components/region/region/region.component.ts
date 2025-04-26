@@ -2,16 +2,18 @@ import { Component } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { SharedModule } from '../../sharedModule/shared.module';
 
 @Component({
   selector: 'app-region',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, ReactiveFormsModule],
+  imports: [HttpClientModule, CommonModule, ReactiveFormsModule, SharedModule],
   templateUrl: './region.component.html',
   styleUrls: ['./region.component.css'],
 })
 export class RegionComponent {
   regions: any[] = [];
+  loading: boolean = true;
   showDialog: boolean = false;
   isEditMode: boolean = false;
   regionForm: FormGroup;
@@ -30,12 +32,14 @@ export class RegionComponent {
   }
 
   fetchRegions() {
+    this.loading = true;
     const apiUrl =
       'https://new-zone-api-brhpfkd2emavh2ep.germanywestcentral-01.azurewebsites.net/api/Regions';
     this.http.get<any[]>(apiUrl).subscribe({
       next: (data) => {
         this.regions = data;
         console.log('Regions:', this.regions);
+        this.loading = false;
       },
       error: (error) => {
         console.error('Error fetching regions:', error);

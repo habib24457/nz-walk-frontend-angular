@@ -1,24 +1,24 @@
 .recent-walks-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 16px;
   justify-content: center;
-  padding: 20px;
-  background-color: #f5f5f7; /* Light gray background for the container */
 }
 
 .walk-card {
-  background-color: #ffffff; /* White card background */
-  border-radius: 20px; /* Rounded corners for a modern look */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  flex: 1 1 calc(33.333% - 16px);
+  max-width: calc(33.333% - 16px);
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   overflow: hidden;
-  width: 320px; /* Fixed width for consistency */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.walk-card:hover {
-  transform: translateY(-10px); /* Lift the card on hover */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+.walk-image {
+  width: 100%;
+  height: auto;
 }
 
 .walk-image {
@@ -66,4 +66,43 @@
 
 .walk-button:hover {
   background-color: #005bb5; /* Darker blue on hover */
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full height for centering */
+  color: #555;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3; /* Light gray */
+  border-top: 5px solid #007aff; /* Apple-like blue */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .walk-card {
+    flex: 1 1 calc(50% - 16px); /* Two cards per row on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .walk-card {
+    flex: 1 1 100%; /* One card per row on very small screens */
+  }
 }

@@ -1,4 +1,6 @@
-<div class="walk-table-container">
+<app-loader [isLoading]="loading"></app-loader>
+
+<div *ngIf="!loading" class="walk-table-container">
   <table class="walk-table">
     <thead>
       <tr>

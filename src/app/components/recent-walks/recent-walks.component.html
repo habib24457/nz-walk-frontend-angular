@@ -1,4 +1,6 @@
-<div class="recent-walks-container">
+<app-loader [isLoading]="loading"></app-loader>
+
+<div *ngIf="!loading" class="recent-walks-container">
   <div class="walk-card" *ngFor="let walk of walks">
     <img
       [src]="walk.walkImageUrl ? walk.walkImageUrl : 'assets/defaultWalk.jpg'"

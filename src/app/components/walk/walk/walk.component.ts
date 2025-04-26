@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { SharedModule } from '../../sharedModule/shared.module';
 
 @Component({
   selector: 'app-walk',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, ReactiveFormsModule],
+  imports: [HttpClientModule, CommonModule, ReactiveFormsModule, SharedModule],
   templateUrl: './walk.component.html',
   styleUrls: ['./walk.component.css'],
 })
@@ -18,6 +19,7 @@ export class WalkComponent {
   isEditMode: boolean = false;
   walkForm: FormGroup;
   selectedWalk: any = null;
+  loading: boolean = true;
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.walkForm = this.fb.group({
@@ -37,12 +39,14 @@ export class WalkComponent {
   }
 
   fetchWalks() {
+    this.loading = true;
     const apiUrl =
       'https://new-zone-api-brhpfkd2emavh2ep.germanywestcentral-01.azurewebsites.net/api/Walks';
     this.http.get<any[]>(apiUrl).subscribe({
       next: (data) => {
         this.walks = data;
         console.log('Walks:', this.walks);
+        this.loading = false;
       },
       error: (error) => {
         console.error('Error fetching walks:', error);

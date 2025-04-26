@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { SharedModule } from '../sharedModule/shared.module';
 
 @Component({
   selector: 'app-recent-walks',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, SharedModule],
   templateUrl: './recent-walks.component.html',
   styleUrls: ['./recent-walks.component.css'],
 })
 export class RecentWalksComponent implements OnInit {
   walks: any[] = [];
+  loading: boolean = true;
 
   constructor(private http: HttpClient) {}
 
@@ -24,10 +26,11 @@ export class RecentWalksComponent implements OnInit {
     this.http.get<any[]>(apiUrl).subscribe({
       next: (data) => {
         this.walks = data;
-        console.log('Walks fetched:', this.walks);
+        console.log('Walksksksk:', this.walks);
+        this.loading = true;
       },
       error: (error) => {
-        console.error('Error fetching walks:', error);
+        console.error('Error fetching regions:', error);
       },
     });
   }

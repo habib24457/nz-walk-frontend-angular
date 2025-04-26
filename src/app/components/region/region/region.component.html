@@ -1,4 +1,6 @@
-<div class="region-table-container">
+<app-loader [isLoading]="loading"></app-loader>
+
+<div *ngIf="!loading" class="region-table-container">
   <table class="region-table">
     <thead>
       <tr>
