@@ -7,6 +7,11 @@ import { RecentWalksComponent } from './components/recent-walks/recent-walks.com
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: 'recentWalk', // Redirect root to /recentWalk
+    pathMatch: 'full',
+  },
+  {
+    path: '',
     component: HomeComponent,
     children: [
       { path: 'recentWalk', component: RecentWalksComponent },
@@ -14,5 +19,5 @@ export const routes: Routes = [
       { path: 'regions', component: RegionComponent },
     ],
   },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: '', pathMatch: 'full' }, // Redirect unknown paths to root
 ];
