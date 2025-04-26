@@ -21,6 +21,7 @@ export class RecentWalksComponent implements OnInit {
   }
 
   fetchWalks() {
+    this;
     const apiUrl =
       'https://new-zone-api-brhpfkd2emavh2ep.germanywestcentral-01.azurewebsites.net/api/Walks';
     this.http.get<any[]>(apiUrl).subscribe({
