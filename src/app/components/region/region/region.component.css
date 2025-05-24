@@ -1,3 +1,4 @@
+.region-table-container,
 .walk-table-container {
   display: flex;
   justify-content: center;
@@ -5,9 +6,13 @@
   height: auto;
   margin-top: 20px;
   overflow-x: auto;
+  width: 100%;
+  padding: 0 8px;
 }
+
 .region-table {
   width: 90%;
+  min-width: 600px;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   font-size: 14px;
@@ -40,6 +45,7 @@
   border-bottom: none;
 }
 
+/* Dialog Styles */
 .dialog {
   position: fixed;
   top: 0;
@@ -58,6 +64,7 @@
   padding: 20px 30px;
   border-radius: 12px;
   width: 400px;
+  max-width: 95vw;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   font-family: Arial, sans-serif;
 }
@@ -91,16 +98,6 @@
 .dialog-actions {
   display: flex;
   justify-content: space-between;
-}
-
-.dialog-content input:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-.dialog-actions {
-  display: flex;
-  justify-content: space-between;
   margin-top: 20px;
 }
 
@@ -109,6 +106,12 @@
   margin: 0 5px;
 }
 
+.dialog-content input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Button Styles (keep your colors and sizes) */
 button {
   background: linear-gradient(to bottom, #f9f9f9, #e3e3e3);
   color: #333;
@@ -164,4 +167,42 @@ button:disabled {
   border: 1px solid #ddd;
   cursor: not-allowed;
   box-shadow: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .region-table {
+    font-size: 13px;
+    min-width: 400px;
+  }
+  .dialog-content {
+    width: 90vw;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .region-table-container,
+  .walk-table-container {
+    padding: 0 2px;
+  }
+  .region-table {
+    width: 100%;
+    min-width: 320px;
+    font-size: 12px;
+  }
+  .region-table th,
+  .region-table td {
+    padding: 8px 6px;
+    font-size: 12px;
+  }
+  .dialog-content {
+    width: 98vw;
+    padding: 10px;
+  }
+  button,
+  .dialog-actions button {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
 }

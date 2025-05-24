@@ -5,10 +5,13 @@
   height: auto;
   margin-top: 20px;
   overflow-x: auto;
+  width: 100%;
+  padding: 0 8px;
 }
 
 .walk-table {
   width: 100%;
+  min-width: 600px;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   font-size: 14px;
@@ -85,6 +88,14 @@ button.danger:hover {
   border-color: #d32f2f;
 }
 
+button:disabled {
+  background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
+  color: #aaa;
+  border: 1px solid #ddd;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 .dialog {
   position: fixed;
   top: 0;
@@ -103,6 +114,7 @@ button.danger:hover {
   padding: 20px 30px;
   border-radius: 12px;
   width: 400px;
+  max-width: 95vw;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   font-family: Arial, sans-serif;
 }
@@ -142,14 +154,6 @@ button.danger:hover {
   margin: 0 5px;
 }
 
-button:disabled {
-  background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
-  color: #aaa;
-  border: 1px solid #ddd;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
 /* Dropdown Menu Styling */
 .dialog-content select {
   width: 100%;
@@ -161,9 +165,9 @@ button:disabled {
   color: #555;
   background-color: #fff;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  appearance: none; /* Removes default browser styling for dropdowns */
-  -webkit-appearance: none; /* For Safari */
-  -moz-appearance: none; /* For Firefox */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23999' d='M2 0L0 2h4z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
@@ -171,12 +175,49 @@ button:disabled {
 }
 
 .dialog-content select:focus {
-  border-color: #0078d4; /* Blue border on focus */
+  border-color: #0078d4;
   outline: none;
-  box-shadow: 0 0 5px rgba(0, 120, 212, 0.5); /* Subtle blue glow */
+  box-shadow: 0 0 5px rgba(0, 120, 212, 0.5);
 }
 
 .dialog-content option {
   font-size: 14px;
   color: #333;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .walk-table {
+    font-size: 13px;
+    min-width: 400px;
+  }
+  .dialog-content {
+    width: 90vw;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .walk-table-container {
+    padding: 0 2px;
+  }
+  .walk-table {
+    width: 100%;
+    min-width: 320px;
+    font-size: 12px;
+  }
+  .walk-table th,
+  .walk-table td {
+    padding: 8px 6px;
+    font-size: 12px;
+  }
+  .dialog-content {
+    width: 98vw;
+    padding: 10px;
+  }
+  button,
+  .dialog-actions button {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
 }

@@ -14,7 +14,7 @@
 .home-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures the image covers the entire section */
+  object-fit: cover;
 }
 
 .home-right {
@@ -39,9 +39,9 @@
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 200px; /* Fixed width for all buttons */
+  width: 200px;
   text-align: center;
-  margin: 10px 0; /* Space between buttons */
+  margin: 10px 0;
 }
 
 .home-button:hover {
@@ -53,4 +53,54 @@
 .home-button:active {
   background: linear-gradient(to bottom, #d6d6d6, #c9c9c9);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .home-container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+  .home-left,
+  .home-right {
+    width: 100%;
+    flex: none;
+    padding: 16px;
+    padding-top: 40px;
+  }
+  .home-right {
+    padding-top: 40px;
+    align-items: stretch;
+  }
+  .home-image {
+    height: 250px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+  .home-left,
+  .home-right {
+    width: 100%;
+    flex: none;
+    padding: 8px;
+    padding-top: 24px;
+  }
+  .home-right {
+    padding-top: 24px;
+    align-items: stretch;
+  }
+  .home-image {
+    height: 150px;
+  }
+  .home-button {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 15px;
+  }
 }
